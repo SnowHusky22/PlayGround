@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#101619" />
+  <title>LOS SANTOS — Drift District</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="game"><canvas id="scene"></canvas>
+    <div class="vignette"></div><div class="grain"></div>
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark">L<span>S</span></div><div><div class="brand-title">DRIFT <b>DISTRICT</b></div><div class="brand-sub">SOUTHERN SAN ANDREAS · 01:24 AM</div></div></div>
+      <div class="top-center"><span class="live-dot"></span><span id="weather">NACHTFAHRT</span><i></i><span id="zone">DOWNTOWN</span></div>
+      <div class="top-right"><div class="wallet"><span class="wallet-icon">＄</span><span id="money">24.850</span></div><button id="settingsBtn" class="icon-btn" aria-label="Einstellungen">☷</button></div>
+    </header>
+    <aside class="left-rail">
+      <div class="profile"><div class="avatar">R</div><div><b>ROOKIE</b><small>DRIFT-RANG <em>D</em></small></div><div class="rank-progress"><span></span></div></div>
+      <div class="rail-label">FAHRZEUG</div><div class="vehicle-name" id="vehicleName">SILVIA S15</div><div class="vehicle-meta" id="vehicleMeta">NISSAN · 420 PS · RWD</div>
+      <div class="stat-row"><span>LEISTUNG</span><b id="powerStat">420 <small>PS</small></b></div><div class="stat-row"><span>ANTRIEB</span><b id="driveStat">RWD</b></div>
+      <div class="rail-divider"></div>
+      <div class="rail-label">AKTIVE SESSION</div><div class="session-item"><span class="session-icon">◈</span><div><b>FREIE FAHRT</b><small>KEINE ZEITBEGRENZUNG</small></div><span class="chevron">›</span></div>
+      <button class="event-card" id="eventBtn"><span class="event-kicker">NÄCHSTER SPOT</span><b>VESPUCCI<br>BEACH PARKING</b><span class="event-foot">2.4 KM <i>↗</i></span><span class="event-glow"></span></button>
+      <div class="left-bottom"><span class="keycap">M</span><span>STADT KARTE</span><span class="keycap">TAB</span><span>GARAGE</span></div>
+    </aside>
+    <div class="right-stack"><div class="map-card"><div class="map-head"><span>LOS SANTOS</span><span class="map-live">● LIVE</span></div><canvas id="minimap" width="220" height="220"></canvas><div class="map-footer"><span>◉ <b id="mapZone">DOWNTOWN</b></span><span id="coordinates">034 · 128</span></div></div>
+      <div class="objective"><div class="objective-top"><span>DRIFT SPOT</span><span class="objective-distance">2.4 KM</span></div><b>VESPUCCI<br>BEACH PARKING</b><div class="objective-bottom"><span>◈ PARKPLATZ EVENT</span><span>↗</span></div></div></div>
+    <div class="speed-panel"><div class="speed-left"><div class="gear-label">GANG</div><div class="gear" id="gear">1</div><div class="drive-pill">RWD <span>●</span></div></div><div class="speed-main"><div class="speed-number" id="speed">000</div><div class="speed-unit">KM/H</div></div><div class="rpm-box"><div class="rpm-header"><span>RPM</span><b id="rpmValue">1.2</b></div><div class="rpm-bars" id="rpmBars"></div></div><div class="speed-bottom"><div class="condition"><span>ENGINE</span><div><i style="width:96%"></i></div></div><div class="condition"><span>TIRES</span><div><i id="tireHealth" style="width:100%"></i></div></div></div></div>
+    <div class="drift-score" id="driftScore"><div class="score-label"><span class="score-dot"></span>DRIFT SCORE</div><div class="score-value" id="scoreValue">0</div><div class="score-combo" id="combo">START A DRIFT TO SCORE</div></div>
+    <div class="toast" id="toast"><span>✦</span><div><b>LOS SANTOS ERWARTET DICH</b><small>WASD / PFEILTASTEN ZUM FAHREN · LEERTASTE FÜR HANDBREMSE</small></div><button id="dismissToast">×</button></div>
+    <div class="controls-hint"><span class="keycap">W</span><span class="keycap">A</span><span class="keycap">S</span><span class="keycap">D</span><small>FAHREN</small><span class="keycap space">SPACE</span><small>HANDBREMSE</small></div>
+    <div class="mobile-controls"><button data-control="left">◀</button><button data-control="right">▶</button><button data-control="brake">HANDBREMSE</button><button data-control="gas">GAS</button></div>
+    <button class="garage-trigger" id="garageBtn"><span>⌘</span> GARAGE <small>T</small></button>
+    <div class="modal-backdrop" id="modalBackdrop"><section class="garage-modal"><div class="modal-header"><div><div class="modal-eyebrow">LOS SANTOS MOTOR CLUB</div><h1>DEINE <i>GARAGE</i></h1></div><button class="close-modal" id="closeModal">×</button></div><div class="garage-tabs"><button class="active" data-tab="cars">FAHRZEUGE</button><button data-tab="tuning">TUNING</button><button data-tab="paint">LACKIERUNG</button></div><div class="garage-content" id="garageContent"></div><div class="modal-footer"><span>ÄNDERUNGEN WERDEN AUTOMATISCH GESPEICHERT</span><button id="backToDrive">ZURÜCK ZUM FAHREN <b>↗</b></button></div></section></div>
+    <div class="map-overlay" id="mapOverlay"><div class="map-overlay-card"><div class="map-overlay-head"><span>LOS SANTOS <b>· SAN ANDREAS</b></span><button id="closeMap">×</button></div><canvas id="bigMap" width="650" height="650"></canvas><div class="map-legend"><span>▲ DEIN FAHRZEUG</span><span>◆ DRIFT SPOTS</span><span>— HIGHWAY</span><small>DRÜCKE M ZUM SCHLIESSEN</small></div></div></div>
+  </div>
+  <script type="module" src="game.js"></script>
+</body>
+</html>
